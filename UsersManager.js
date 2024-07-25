@@ -1,5 +1,9 @@
+const crypto=require('crypto')
+
+
 class UsersManager {
-  static usuarios = [];
+  
+    static usuarios = [];
 
   static getUsuarios = () => {
     return this.usuarios;
@@ -31,10 +35,17 @@ class UsersManager {
       return;
     }
 
+    let existe=UsersManager.usuarios.find(usuario=>usuario.email===email)
+    if(existe){
+        console.log(`Ya existen usuarios con ${mail}`)
+    }
+
     let id = 1;
     if (UsersManager.usuarios.length > 0) {
       id = math.max(...UsersManager.usuarios.map((d) => d.id)) + 1;
     }
+
+    password=crypto.createHmac('sha512', 'coder123').update(password).digest('hex')
 
     let nuevoUsuario = {
       id,
@@ -45,7 +56,18 @@ class UsersManager {
 
     UsersManager.usuarios.push(nuevoUsuario);
     console.log("Usuario Creado");
-  }
+  } //adduser
+
+    static login(email, password){
+        password=String(password)
+        password=crypto.createHmac('sha512', 'coder123').update(password).digest('hex')
+        let usuario=UsersManager.usuarios.find(usuario=>usuario.email===email && usuario.password===password)
+        if(!usuario){
+            console.log("Usuario o contraseña incorrectos")
+            return
+        }
+    }
+
 }
 
 console.log(UsersManager.getUsuarios());
