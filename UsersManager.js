@@ -66,8 +66,8 @@ class UsersManager {
             console.log("Usuario o contraseña incorrectos")
             return
         }
+        console.log(`Login correcto, bienvenido ${usuario.nombre}!`)
     }
-
 }
 
 console.log(UsersManager.getUsuarios());
@@ -77,3 +77,7 @@ UsersManager.addUsuario(" ", "juan@mail.com", "123");
 UsersManager.addUsuario(100, "juan@mail.com");
 UsersManager.addUsuario("juan", "juantest.com", "123");
 UsersManager.addUsuario("juan", "juan@mail.com", "123");
+
+UsersManager.login("carlos@test.com", "123")
+UsersManager.login("martina@mail.com", "9999sdsdsd")
+UsersManager.login("juan@mail.com", "123")
