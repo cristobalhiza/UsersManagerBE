@@ -1,6 +1,5 @@
 const crypto=require('crypto')
 
-
 class UsersManager {
   
     static usuarios = [];
@@ -37,15 +36,15 @@ class UsersManager {
 
     let existe=UsersManager.usuarios.find(usuario=>usuario.email===email)
     if(existe){
-        console.log(`Ya existen usuarios con ${mail}`)
+        console.log(`Ya existen usuarios con ${email}`)
     }
 
     let id = 1;
     if (UsersManager.usuarios.length > 0) {
-      id = math.max(...UsersManager.usuarios.map((d) => d.id)) + 1;
+      id = Math.max(...UsersManager.usuarios.map((d) => d.id)) + 1;
     }
 
-    password=crypto.createHmac('sha512', 'coder123').update(password).digest('hex')
+    password=crypto.createHmac('sha512', 'Coder123').update(password).digest('hex')
 
     let nuevoUsuario = {
       id,
@@ -60,7 +59,7 @@ class UsersManager {
 
     static login(email, password){
         password=String(password)
-        password=crypto.createHmac('sha512', 'coder123').update(password).digest('hex')
+        password=crypto.createHmac('sha512', 'Coder123').update(password).digest('hex')
         let usuario=UsersManager.usuarios.find(usuario=>usuario.email===email && usuario.password===password)
         if(!usuario){
             console.log("Usuario o contraseña incorrectos")
@@ -77,7 +76,13 @@ UsersManager.addUsuario(" ", "juan@mail.com", "123");
 UsersManager.addUsuario(100, "juan@mail.com");
 UsersManager.addUsuario("juan", "juantest.com", "123");
 UsersManager.addUsuario("juan", "juan@mail.com", "123");
+UsersManager.addUsuario("juan", "juan@mail.com", "123");
+UsersManager.addUsuario("Luciana", "luciana@test.com","123")
+UsersManager.addUsuario("Martina", "martina@test.com", "123")
+
+console.log(UsersManager.getUsuarios)
+
 
 UsersManager.login("carlos@test.com", "123")
-UsersManager.login("martina@mail.com", "9999sdsdsd")
-UsersManager.login("juan@mail.com", "123")
+UsersManager.login("martina@test.com", "9999sdsdsd")
+UsersManager.login("martina@test.com", "123")
